@@ -1,94 +1,82 @@
-#containerImagem {
-  margin:0;
-  padding:20px;
-  /* IE10 Consumer Preview */ 
-  background-image: -ms-radial-gradient(center, ellipse farthest-corner, #36FFC9 0%, #175052 100%);
-  /* Mozilla Firefox */ 
-  background-image: -moz-radial-gradient(center, ellipse farthest-corner, #36FFC9 0%, #175052 100%);
-  /* Opera */ 
-  background-image: -o-radial-gradient(center, ellipse farthest-corner, #36FFC9 0%, #175052 100%);
-  /* Webkit (Safari/Chrome 10) */ 
-  background-image: -webkit-gradient(radial, center center, 0, center center, 500, color-stop(0, #36FFC9), color-stop(1, #175052));
-  /* Webkit (Chrome 11+) */ 
-  background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #36FFC9 0%, #175052 100%);
-  /* W3C Markup, IE10 Release Preview */ 
-  background-image: radial-gradient(ellipse farthest-corner at center, #36FFC9 0%, #175052 100%);
+.avatar {
+  height: 200px;
+  position: relative;
+  width: 200px;
 }
 
-#main {
-  margin:0 auto;
-  padding:20px;
-  width:960px;
-  background: rgba(0,0,0,.8);
-  border-radius:20px;
+.avatar img {
+  border-radius: 9999px;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 2;
 }
 
-#photo {
-  width:250px;
-  height:250px;
-  background: black;
-  border:5px solid white;
-  margin: 50px auto 120px;
-  border-radius:50px;
-  transition: all 2s;
-  -moz-transition: all 2s; /* Firefox 4 */
-  -webkit-transition: all 2s; /* Safari and Chrome */
-  -o-transition: all 2s; /* Opera */
+@-webkit-keyframes cycle-colors {
+  0% { border-color: hsl(0, 100%, 50%); }
+  25% { border-color: hsl(90, 100%, 50%); }
+  50% { border-color: hsl(180, 100%, 50%); }
+  75% { border-color: hsl(270, 100%, 50%); }
+  100% { border-color: hsl(360, 100%, 50%); }
 }
 
-#pic {
-  width:250px;
-  height:250px;
-  background: url('gabriel.png') center center;
-  border-radius:50px;
-  opacity:0.4;
-  transition: all 2s;
-  -moz-transition: all 2s; /* Firefox 4 */
-  -webkit-transition: all 2s; /* Safari and Chrome */
-  -o-transition: all 2s; /* Opera */
+@-webkit-keyframes pulse {
+  to {
+    opacity: 0;
+    -webkit-transform: scale(1);
+  }
 }
 
-#text {
-  padding:0;
-  width:180px;
-  margin:10px auto 0;
-  font-size:20px;
-  text-align:center;
-  color:black;
-  opacity:0;
-  transition: opacity .2s;
-  -moz-transition: opacity .2s; /* Firefox 4 */
-  -webkit-transition: opacity .2s; /* Safari and Chrome */
-  -o-transition: opacity .2s; /* Opera */
+@keyframes cycle-colors {
+  0% { border-color: hsl(0, 100%, 50%); }
+  25% { border-color: hsl(90, 100%, 50%); }
+  50% { border-color: hsl(180, 100%, 50%); }
+  75% { border-color: hsl(270, 100%, 50%); }
+  100% { border-color: hsl(360, 100%, 50%); }
 }
 
-#photo:hover {
-  margin:0 auto;
-  width:250px;
-  height:250px;
-  border-radius:0;
-  border-bottom-width:75px;
-  transition: all 2s;
-  -moz-transition: all 2s; /* Firefox 4 */
-  -webkit-transition: all 2s; /* Safari and Chrome */
-  -o-transition: all 2s; /* Opera */
+@keyframes pulse {
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
 }
 
-#photo:hover > #pic {
-  width:250px;
-  height:250px;
-  border-radius:0;
-  opacity:1;
-  transition: all 2s, opacity 2s ease-in;
-  -moz-transition: all 2s, opacity 2s ease-in; /* Firefox 4 */
-  -webkit-transition: all 2s, opacity 2s ease-in; /* Safari and Chrome */
-  -o-transition: all 2s, opacity 2s ease-in; /* Opera */
+.avatar::before,
+.avatar::after {
+  -webkit-animation: pulse 2s linear infinite;
+  animation: pulse 2s linear infinite;
+  border: #fff solid 8px;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  content: ' ';
+  height: 140%;
+  left: -20%;
+  opacity: .6;
+  position: absolute;
+  top: -20%;
+  -webkit-transform: scale(0.714);
+  transform: scale(0.714);
+  width: 140%;
+  z-index: 1;
 }
 
-#photo:hover > #text {
-  opacity:1;
-  transition: opacity .2s 1.8s;
-  -moz-transition: opacity .2s 1.8s; /* Firefox 4 */
-  -webkit-transition: opacity .2s 1.8s; /* Safari and Chrome */
-  -o-transition: opacity .2s 1.8s; /* Opera */
+.avatar::after {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.avatar:hover img {
+  content: url('gabriel.png');
+}
+
+.avatar:hover::before,
+.avatar:hover::after {
+  -webkit-animation: pulse 1s linear infinite, cycle-colors 6s linear infinite;
+  animation: pulse 1s linear infinite, cycle-colors 6s linear infinite;
+}
+
+.avatar:hover::after {
+  -webkit-animation-delay: .5s;
+  animation-delay: .5s;
 }
